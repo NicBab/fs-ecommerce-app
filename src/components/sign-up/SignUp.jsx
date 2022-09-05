@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { FormInput } from "../../components/components.index/index";
 import {
   createAuthUserWithEMailAndPassword,
   createUserDocumentFromAuth,
-} from "../../../utils/firebase/firebase";
+} from "../../utils/firebase/firebase";
 
 const defaultFormFields = {
   displayName: " ",
@@ -12,13 +13,13 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
-const SignUpForm = () => {
+const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
-  }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +35,7 @@ const SignUpForm = () => {
         password
       );
       await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields(); 
+      resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("User already in use");
@@ -56,8 +57,8 @@ const SignUpForm = () => {
     <div>
       <h1>Sign up with email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           type="text"
           name="displayName"
           value={displayName}
@@ -65,8 +66,8 @@ const SignUpForm = () => {
           required
         />
 
-        <label>Email</label>
-        <input
+        <FormInput
+          label="Email"
           type="email"
           name="email"
           value={email}
@@ -74,8 +75,8 @@ const SignUpForm = () => {
           required
         />
 
-        <label>Password</label>
-        <input
+        <FormInput
+          label="Password"
           type="password"
           name="password"
           value={password}
@@ -83,8 +84,8 @@ const SignUpForm = () => {
           required
         />
 
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           type="password"
           name="confirmPassword"
           value={confirmPassword}
@@ -97,4 +98,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignUp;
