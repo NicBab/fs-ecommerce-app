@@ -1,6 +1,6 @@
-import React from "react";
+import './SignUpForm.scss'
 import { useState } from "react";
-import { FormInput } from "../../components/components.index/index";
+import { FormInput, Button } from "../components.index/index";
 import {
   createAuthUserWithEMailAndPassword,
   createUserDocumentFromAuth,
@@ -13,7 +13,7 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
-const SignUp = () => {
+const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -54,8 +54,9 @@ const SignUp = () => {
   console.log(formFields);
 
   return (
-    <div>
-      <h1>Sign up with email and password</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account?</h2>
+      <span>Sign up with email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
@@ -92,10 +93,10 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );
 };
 
-export default SignUp;
+export default SignUpForm;
