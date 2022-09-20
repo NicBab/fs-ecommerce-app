@@ -2,7 +2,7 @@ import './SignUpForm.scss'
 import { useState } from "react";
 import { FormInput, Button } from "../components.index/index";
 import {
-  createAuthUserWithEMailAndPassword,
+  createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase";
 
@@ -30,10 +30,11 @@ const SignUpForm = () => {
     }
 
     try {
-      const { user } = await createAuthUserWithEMailAndPassword(
+      const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
+
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
@@ -51,7 +52,6 @@ const SignUpForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
@@ -65,7 +65,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           required
         />
-
         <FormInput
           label="Email"
           type="email"
@@ -74,7 +73,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           required
         />
-
         <FormInput
           label="Password"
           type="password"
@@ -83,7 +81,6 @@ const SignUpForm = () => {
           onChange={handleChange}
           required
         />
-
         <FormInput
           label="Confirm Password"
           type="password"

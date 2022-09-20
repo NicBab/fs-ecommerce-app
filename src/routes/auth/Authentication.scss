@@ -1,6 +1,13 @@
 .auth-container {
     display: flex;
-    justify-content: space-between;
-    width: 900px;
-    margin: 30px auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+@media screen and (min-width: 800px) {
+    .auth-container {
+        flex-direction: row;
+    }
 }

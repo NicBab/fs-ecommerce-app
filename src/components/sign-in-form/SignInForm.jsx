@@ -1,4 +1,5 @@
 import "./SignInForm.scss";
+import styles from '../../style'
 import { useState } from "react";
 import { FormInput, Button } from "../components.index/index";
 import {
@@ -16,21 +17,20 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const SignInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup()
-    await createUserDocumentFromAuth(user);
+  const signInWithGoogle = async () => {
+   await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(response)
+      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
 
       resetFormFields();
     } catch (error) {
@@ -41,6 +41,9 @@ const SignInForm = () => {
         case "auth/user-not-found":
           alert("no user found with this email");
           break;
+        case "auth/too-many-requests":
+          alert("too many attempts to login... please reset your password!");
+          break
         default:
           console.log(error)
       }
@@ -52,7 +55,6 @@ const SignInForm = () => {
 
     setFormFields({ ...formFields, [name]: value });
   };
-
 
   return (
     <div className="sign-in-container">
@@ -76,8 +78,8 @@ const SignInForm = () => {
           required
         />
         <div className="buttons-container">
-          <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType="google" onClick={SignInWithGoogle}>
+          <Button type="submit" className={`${styles.flexCenter}`}>Sign In</Button>
+          <Button type='button' buttonType="google" onClick={signInWithGoogle}>
             Google Sign In
           </Button>
         </div>

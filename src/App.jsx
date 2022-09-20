@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Navigation, Authentication } from "././routes/routes.index/index";
+import { Navigation } from "./components/components.index/index"
+import { Home, Authentication } from "././routes/routes.index/index";
 
 const App = () => {
   return (
