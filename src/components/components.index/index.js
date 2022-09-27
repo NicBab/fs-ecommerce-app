@@ -9,3 +9,6 @@ export { default as SignInForm } from '../sign-in-form/SignInForm';
 
 //BUTTONS
 export { default as Button } from '../buttons/Button';
+
+//CARDS
+export { default as ProductCard } from ".././product-card/ProductCard"
